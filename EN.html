@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Historia w sztuce - MOCAK | Prezentacja panoramiczna - wkraj.pl</title>
+	    <meta name="description" content="Zobacz wirtualną wycieczkę po : Historia w sztuce - MOCAK -  panoramy wkraj.pl zapraszamy">
+
+		<meta property="og:title" content="Historia w sztuce - MOCAK | Prezentacja panoramiczna - wkraj.pl" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://www.wkraj.pl" />
+		<meta property="og:image" itemprop="image" content="https://www.wkraj.pl/data/87550_photo.jpg" />
+
+					<!-- <link rel="stylesheet" href="app/dist/player.css?r=18" media="all"> -->
+						<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+			<link rel="stylesheet" href="app/dist/wkraj_player.css" media="all">			
+					<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<style></style>
+	</head>
+	<body>
+		<!--
+		<div id='preloader'>
+		</div>
+		-->
+	<div id='bglogo'>
+		<h1 style='color:#ffffff;'>Historia w sztuce</h1>	</div>
+
+			<div id='player'>
+		</div>
+		
+		<div id='speech_cnt' style=''>
+			<audio id='speech' src="">
+				<source id='speech_mp3' src="" type="audio/mpeg">
+			</audio>
+			<audio id='speechtip' src="">
+				<source id='speechtip_mp3' src="" type="audio/mpeg">
+			</audio>
+			<audio id='music' src="">
+				<source id='music_mp3' src="" type="audio/mpeg">
+			</audio>
+		</div>
+		
+		<div id='ui'>
+			
+			
+			<div id='panosback'><!-- ontouchend='player.list.multiBack();' -->
+				<div id='menuHomeButton'><a href='javascript:void(null);'><img src='assets/back.png' width='84' height='84' style='opacity:1;float:left;'></a></div>
+			</div>
+			
+			<div id='menubar'>
+				<a href='javascript:void(null);' id='menubar_menu' class='menu-item active'>
+					<img src='assets/menulist.png' width='32' height='32'>
+					<span class='tip'>Menu</span>
+				</a>
+				<a href='javascript:void(null);' id='menubar_langicon' class='menu-item'>
+					<img src='' id='glyph_langicon'>
+					<span class='tip'>Język</span>
+				</a>
+				<a href='javascript:void(null);' id='menubar_nearest' class='menu-item'>
+					<img src='assets/nearmap.png' width='32' height='32'>
+					<span class='tip'>W pobliżu</span>
+				</a>
+				<a href='javascript:void(null);' class='close' id='navbar_close'>&times;</a>
+			</div>
+			
+			<div id='panos'>				
+			</div>
+			
+			<div id='hotspots'>
+			</div>
+			
+			<div id='elements'>
+			</div>
+
+			<div id='debug'>
+			</div>
+			<div id='overlay'>
+				<div id='info'>
+					Panorama
+				</div>
+				<div id='textinfo'>
+					<div id='textheader'></div>
+					<div id='infothumb'>
+					</div>
+					<div id='placeside'></div>
+					<div id='infotextcontent'>
+					</div>
+				</div>
+
+				<div id='menu' class='bottombar'><!--  onclick='player.showMenu();' -->
+					<a href='javascript:void(null);'><img src='assets/menu.png' width='84' height='84'></a>
+					<span id='bbar_menu' class='bbar_label'>MENU</span>
+				</div>
+				
+				<div id='infomenu'> <!--onclick='placeInfo.toggleMenu();'-->
+					<a href='javascript:void(null)'><img src='assets/back.png'></a><Br>
+				</div>
+				
+				<div id='mapinfo' class='hidden' aria-hidden='true'>
+					<div id='mapbar'>
+						<div class='coords'>
+						</div>
+						<a href='javascript:void(null)' class='back speaks' title='Zmniejsz mapę' data-speak="PLAYER.MAPBAR.MINIMIZE" data-speakgroup="TIPS" aria-hidden='true'>
+							&times;
+							<!--<img src='assets/back.png' width='84' height='84'>-->
+						</a>
+					</div>
+					<div id='searchbar'>
+						<div class='search'>
+							<input type='text' id='front_search' aria-hidden='true' placeholder='Szukaj ...' title="Wpisz szukany tekst">
+						</div>
+						<div class='button'>
+							<a href='javascript:void(null)' aria-hidden='true' onclick='mapInfo.goSearch();' title="Szukaj" data-speak="PLAYER.SEARCH" data-speakgroup="TIPS" class="speaks"><span class='fa fa-search'></span></a>
+						</div>
+					</div>
+					<div id='mapcontent'>
+					</div>
+					
+				</div>
+				<!--
+				<div id='menubutton' class='bottombar'>
+					<a href='javascript:void(null)'><img src='assets/menu_info.png' width='84' height='84'></a><Br>
+					<span>INFO</span>
+				</div>
+				-->
+				
+				<div id='mapbutton' class='bottombar'>
+					<a href='javascript:void(null)' aria-hidden='true'><img src='assets/menu_map.png' width='84' height='84'></a><Br>
+					<span id='bbar_map' class='bbar_label'>MAPA</span>
+				</div>
+
+				<div class='tray'>
+				</div>
+			</div>
+			<div id='console' style='display:none;'>
+			</div>
+		</div>
+		<div id='panels'>
+			<div id='languages'>
+			</div>		
+		</div>
+		</div>
+	<div id="loaderIcon" title="0">
+  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80px" height="80px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+	</div>
+</div>
+		<script id="nearest-main" type="text/x-handlebars-template">
+	<div class='inner' id='nearest_inner'>{{{data}}}</div>
+	<div id='neartags' style='padding-right:10px;'>
+		<a href='javascript:void(null);' class='menu' onclick='NearestManager.toggleCategoryMenu();' style='position:absolute;right:20px;text-align:right;'>
+			Wszystkie kategorie <img src='assets/dropdown.png' width='15'>
+		</a>
+	</div>
+	<div id='neartags_taglist'>
+		<div style='background-color:#000000;position:fixed;right:0px;top:0px;'>
+			<a href='javascript:void(null);' onclick='$("#neartags_taglist").toggle();'>Zamknij listę &times;</a>
+		</div>
+		{{{alltags}}}
+	</div>
+	<div id='select_route'>
+		Jaką trasę chcesz wyznaczyć:
+		<br><br>
+		<a href='javascript:void(null);' onclick='NearestManager.routeFromHome();' id='from_home'>Z mojej lokalizacji</a>
+		<a href='javascript:void(null);' onclick='NearestManager.routeFromPano();' id='from_pano'>Z teraz oglądanej panoramy</a>
+		<Br>
+		<a href='javascript:void(null)' ontouchend='$("#select_route").hide();' style='background-color:transparent;border:0px;position:absolute;bottom:30px;margin:0;padding:0;width:100%;'>
+			<img src='assets/back.png' width='100'>
+		</a>
+	</div>
+</script><script id="plan-main" type="text/x-handlebars-template">	
+	<div id='plan-canvas'>
+		<img src='/storage/plan/{{planfile}}' id='planfile'>		
+		<svg id="cons" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>		
+		<div id='plan-points'>
+		</div>
+	</div>
+	
+	<a href='javascript:void(null);' class='zoomin' {{pdown}}='Plan.deltaZoom(0.01);' {{pup}}='Plan.deltaZoom(0);'><span>+</span></a>
+	<a href='javascript:void(null);' class='zoomout' {{pdown}}='Plan.deltaZoom(-0.01);' {{pup}}='Plan.deltaZoom(0);'><span>-</span></a>
+
+	<div class='plans' {{pdown}}='Floors.open(); event.stopPropagation();'>
+		<img src='assets/floors.png' width='30' height='30'>		
+	</div>
+	
+	<div class='ffloors'></div>
+
+	<div class='plans_label' style='z-index:99999'>{{lng "plan.levels" "POZIOMY"}}</div>
+	<div id='search_tip' style='z-index:99999'>{{lng "search.icon_title" "SZUKAJ"}}</div>
+
+	<div id='heading'>
+		<div class='backarrow' {{pdown}}='mapInfo.toggleMenu();'><img src='assets/back_icon.png' width='32' height='32'></div>
+		
+		<span class='title'></span>
+	</div>
+	<div id='routebar'>
+		<div id='route_from'>
+			<div class='small_start_icon'><img src='assets/start_black.png' width='14' height='14'></div>
+			&nbsp; <span></span>
+		</div>
+		<div id='route_to'>
+			<div class='small_end_icon'><img src='assets/end_black.png' width='14' height='14'></div>
+			&nbsp; <span></span>
+		</div>		
+	</div>
+	<div id='route_go_bar'>
+		<a href='javascript:void(null);' class='route_go flashing'>{{lng "plan.run_route" "URUCHOM"}}</a>
+	</div>
+	<div id='search_icon' class='plan_search_icon'><img width="32" height="32" src="assets/search.png"></div>
+	<div id='mapbutton'>
+		<a href='javascript:void(null)' onclick='Floors.load(Floors.defaultFloor);'><img width="84" height="84" src="assets/menu_map.png"></a>
+		<br>
+		<span id="bbar_map">{{lng "bottombar.map" "MAPA"}}</span>
+	</div>
+</script>
+
+<script id="floors-main" type="text/x-handlebars-template">
+	<div id='floors_box'>
+		<div class='close'><a href='javascript:void(null);' onclick='Floors.close();'>&times;</a></div>
+		<div class='clear'></div>
+	</div>
+
+	<div id='floors_result_box'>
+	</div>
+</script>
+
+<script id="floor-header" type="text/x-handlebars-template">
+	<div class='floors_row'>
+		<div class='title'>
+			<b>{{lng "plan.mapsandlevels" "MAPY I PLANY"}}</b>
+		</div>
+		<div class='levels'>
+			<b>{{lng "plan.levels" "POZIOMY"}}</b>
+		</div>
+		<div class='clear'></div>
+	</div>
+</script>
+
+<script id="floor-row" type="text/x-handlebars-template">
+	<div class='floors_row'>
+		<div class='title'>
+			{{position}}) &nbsp; {{title}}
+		</div>
+		<div class='levels {{#if nobasement}}nobasement{{/if}}'>
+		{{#each levels}}
+			<a href='javascript:void(null)' data-plan='{{plan_id}}' {{../pdown}}='Floors.load({{plan_id}});' class='level {{#if active}}active blink {{/if}}'>{{level}}</a>
+		{{/each}}
+			<div class='clear'></div>
+		</div>
+		<div class='clear'></div>
+	</div>
+</script>
+
+<script id="select-floor" type="text/x-handlebars-template">
+	<div class='floors_row'>
+		
+		<div class='plan_title'>
+			<b>Plan:</b> {{title}}
+		</div>
+		<div class='clear'></div>		
+		<div class='levels_label'><b>{{lng "plan.level" "POZIOM"}}:</b></div>
+		<div class='levels'>		
+			{{#each levels}}
+				<a href='javascript:void(null)' data-plan='{{plan_id}}' {{../pdown}}='Floors.load({{plan_id}});' class='level l2 {{#if active}}active blink {{/if}}'>{{level}}</a>
+			{{/each}}
+			<div class='clear'></div>
+		</div>
+	</div>
+</script><script id="search-main" type="text/x-handlebars-template">
+	<div id='search_box'>
+		<div class='close'><a href='javascript:void(null);' onclick='Search.close();'>&times;
+		<!-- <img src='assets/back_icon.png' width='32' height='32'> -->
+		</a></div>
+		{{lng "search.title" "Wyszukiwarka"}}
+		<div class='clear'></div>
+
+		<div class='searchbar'>
+			<div class='right'>
+				<a href='javascript:void(null);'><img src='assets/search.png' width='24' height='24'></a>
+			</div>
+			<div class='left'>
+				<input type='text' id='words' placeholder='{{lng "search.prompt" "Wyszukaj miejsce"}}'>
+			</div>
+			<div class='clear'></div>
+		</div>
+		<div id="search_filter">
+			<label><input type='radio' name='filter' class='radio' checked> Szukaj w projekcie</label>
+			<label><input type='radio' name='filter' id='search_filter_all' class='radio'> Szukaj w wirtualnykraj.pl</label>
+		</div>
+	</div>
+
+	{{#if routing}}
+	<!--
+	<div id='search_help_box'>
+		<div class='info'>{{lng "search.help1" "Wyszukaj miejsce, do którego chcesz dotrzeć, lub z którego chcesz rozpocząć."}}</div>
+		<div class='icon'><img src='assets/start_white.png' width='24' height='24'></div>
+		<div class='desc'>{{lng "search.help2" "Kliknij na tą ikonkę przy wyszukanym miejscu, jeżeli chcesz oznaczyć je jako początek trasy."}}</div>
+		<div class='clear'></div>
+		<div class='icon'><img src='assets/end_white.png' width='24' height='24'></div>
+		<div class='desc'>{{lng "search.help3" "Kliknij na tą ikonkę przy wyszukanym miejscu, jeżeli chcesz oznaczyć miejsce jako koniec trasy."}}</div>
+	</div>
+	-->
+	{{/if}}
+	<div class='buttons' {{#if buttons}}style='display:block;'{{/if}}>
+		<a href='javascript:void(null);' {{pointer_up}}='Search.goMap();' class='flashing'>{{lng "search.map" "Mapa"}}</a>
+		<a href='javascript:void(null);' {{pointer_up}}='Search.goRoute();' class='flashing'>{{lng "search.go" "Przejdź trasę"}}</a>
+	</div>
+
+	<div id='search_result_box'>
+	</div>
+</script>
+
+<script id="search-row" type="text/x-handlebars-template">
+	<div class='row'>
+		<div class='title' {{up}}='Search.up({{id}},{{look_x}},{{look_y}});' {{down}}='Search.down();' {{move}}='Search.move();'>
+			<img src='{{ thumb }}' style='float:left;margin-right: 10px; border-radius: 3px;' width='100'>
+			<span class='{{#if current}}active{{/if}}'>{{{title}}}</span>
+			<br><small>{{location}}{{#if level}}, {{level}}{{/if}}</small>
+			{{#if body}}<small class='desc'>{{{ body }}}</small>{{/if}}
+			{{#if extra}} <div class='more'>{{{ extra }}}</div> {{/if}}
+		</div>
+		<div class='icons'>
+			{{#if routing}}
+			<a href='javascript:void(null);' {{pointer_up}}='Search.setEnd(event, {{target}},{{plan}},"{{title}}");' class='icon {{classto}}'><img src='assets/end_white.png' width='16' height='16'></a>
+			<a href='javascript:void(null);' {{pointer_up}}='Search.setStart(event, {{target}},{{plan}},"{{title}}");' class='icon {{classfrom}}'><img src='assets/start_white.png' width='16' height='16'></a>
+			{{/if}}
+		</div>		
+		<div class='clear'></div>
+	</div>
+</script><script id="dialog-main" type="text/x-handlebars-template">
+	<div id='dialog' class='dialog dialog_notrans'>
+		{{#if hasIcon}}
+		<span id='dialog_icon'>
+			{{{icon}}}
+		</span>
+		{{/if}}
+		<span id='dialog_message'>
+			{{{message}}}
+		</span>
+		<div class='clear'></div>
+		<div class='bottom'>
+			<a href='javascript:void(null);' onclick='Dialog.okHandler()' class='ok'>{{button}}</a>
+		</div>
+	</div>
+</script>
+
+<script id="dialog-flash" type="text/x-handlebars-template">
+	<div id='dialog_flash' class='dialog dialog_notrans'>
+		<span id='dialog_icon'>
+			{{{icon}}}
+		</span>
+		<span id='dialog_message'>
+			{{{message}}}
+		</span>
+		<div class='clear'></div>
+		{{{help}}}
+	</div>
+</script>
+
+<script id="dialog-tutorial" type="text/x-handlebars-template">
+	<div id='dialog_flash' class='dialog dialog_notrans'>
+		<center>
+			{{{message}}}
+			{{{icon}}}
+		</center>
+		<div class='clear'></div>
+	</div>
+</script>
+
+<script id="dialog-multiopt" type="text/x-handlebars-template">
+	<div id='dialog' class='dialog dialog_notrans'>
+		<a href='javascript:void(null);' {{{clickEvent}}}='Dialog.cancel("#dialog")' class='close'>&times;</a>
+		<!--
+		<span id='dialog_icon'>
+			{{{icon}}}
+		</span>
+		-->
+		<span id='dialog_message'>
+			{{{message}}}
+		</span>
+		<div class='clear'></div>
+		<div class='bottom'>
+			<div class='help'>{{help}}</div>
+			{{#each options}}
+			<a href='javascript:void(null);' {{{../clickEvent}}}='Dialog.optionHandler({{@index}}, "#dialog")' class='ok'>{{this}}</a><br>
+			{{/each}}
+		</div>
+	</div>
+</script>
+
+<script id="dialog-routeopt" type="text/x-handlebars-template">
+	<div id='dialogroute' class='dialog dialog_notrans'>
+		<a href='javascript:void(null);' {{{clickEvent}}}='Dialog.cancel("#dialogroute")' class='close'>&times;</a>
+
+		<span id='dialog_message'>
+			<div class='category'>{{{category}}}</div>
+			<div class='symbol'>ID: {{{id}}}</div>
+			<div class='clear'></div>
+			{{{placeName}}}
+			<div class='preview' {{{clickEvent}}}='Dialog.optionHandler(0, "#dialogroute", event)' style='background-image:url({{thumb}});'>
+				<a href='javascript:void(null);' {{{clickEvent}}}='Dialog.optionHandler(0, "#dialogroute", event)' class='ok'><span>{{go}}</span></a>
+			</div>
+		</span>
+		<div class='clear'></div>
+		<div class='bottom'>
+			<div class='help'>{{help}}</div>
+			<div class='routeselect'>
+				<div class='arrow'></div>
+				<a href='javascript:void(null);' {{{clickEvent}}}='Dialog.optionHandler(1, "#dialogroute", event)' class='routebegin'><span>{{start}}</span></a>
+				<a href='javascript:void(null);' {{{clickEvent}}}='Dialog.optionHandler(2, "#dialogroute", event)' class='routeend'><span>{{finish}}</span></a>
+			</div>
+		</div>
+	</div>
+</script><script id="help-main" type="text/x-handlebars-template">
+	<div class='helpbar helpstate'>
+		{{lng "help.title" "Pomoc"}}
+		<div class='backarrow'><img src='assets/back_icon.png' width='32' height='32'></div>
+		<!--<div class='settings'><img src='assets/settings.png' width='32' height='32'></div>-->
+	</div>
+	<div class='helppage helpstate'>
+		{{lng "help.short" "Tutaj znajdziesz informacje<br>jak poruszac się po projekcie."}}
+		
+		<h2>
+			{{project_name}}
+		</h2>		
+
+		<img src='{{qrcode}}' width='150' class='qr' id='qrcode'>
+
+		<center>
+			<span id='pano_name'></span>
+			<h4>
+				ID: <a href='//{{domain}}.wkraj.pl/html5/index.php?id={{ident}}' id='selfurl'><span id='help_pano_id'>{{ident}}</span></a>
+			</h4>
+		</center>		
+		<div class='helptip'>
+			<div class='image'><img src='assets/help_pano.png'></div>
+			<div class='text'>{{lng "help.tip1" "Przesuń palcem po ekranie aby zmienić kierunek patrzenia."}}</div>
+			<div class='clear'></div>
+		</div>
+		<div class='helptip'>
+			<div class='image'><img src='assets/help_spot.png'></div>
+			<div class='text'>{{lng "help.tip2" "Stuknij raz w gorący punkt, aby uzyskać informacje o miejscu do którego on prowadzi."}}</div>
+			<div class='clear'></div>
+		</div>
+		<div class='helptip'>
+			<div class='image'><img src='assets/help_spot2.png'></div>
+			<div class='text'>{{lng "help.tip3" "Stuknij dwa razy w gorący punkt, aby przejść do miejsca oznaczonego przez ten punkt."}}</div>
+			<div class='clear'></div>
+		</div>
+	</div>
+	<div class='helpbar aboutstate'>		
+		{{lng "help.about" "Realizacja"}}
+		<div class='backarrow'><img src='assets/back_icon.png' width='32' height='32'></div>
+		<!--<div class='settings'><img src='assets/settings.png' width='32' height='32'></div>-->
+	</div>
+	<div class='helppage aboutstate'>
+		<img src='assets/bg_logo.png' height='80' class='logo'><br>
+		<div class='txt'>
+			{{lng "CONTACT_TEXT_1" ""}}
+			{{lng "CONTACT_TEXT_2" ""}}
+			<!--
+			FIRMA: E-KONTAKT PAWEŁ JARZĘBIŃSKI<br>
+			NIP: 737-116-21-43<br>
+			REGON: 492954050<br>
+			PKD 6312Z<br><br>
+
+			PAWEŁ JARZĘBIŃSKI<br>
+			e-mail: <a href='mailto: pj@wirtualnykraj.pl' class='link'>pj@wirtualnykraj.pl</a><br>
+			tel: <a href='tel:695 100 001' class='link'>695 100 001</a><br>
+			Skype: wirtualnykraj<br>
+			-->
+			</div>
+	</div>
+</script><script id="autoplay-main" type="text/x-handlebars-template">
+	<div id='autoplay_box'>
+		<div id='autoplay_back'>&times;</div>
+		<div id='autoplay_speed'><img src='assets/speed2.png'><span>{{lng "autopilot.speed" "Prędkość"}}:<Br><b>{{lng "autopilot.slow" "Wolno"}}</b></span></div>
+		<div id='autoplay_icon' class='auto_running'><span>{{lng "autopilot.stop" "Zatrzymaj"}}</span><img src='assets/pause.png'></div>
+		<div id='autoplay_speedlist'>
+			<div class='item' {{pdown}}='Autopilot.setspeed(1);'>
+				<img src='assets/speed4.png'><span><b>{{lng "autopilot.very_fast" "b. szybko"}}</b></span>				
+			</div>
+			<div class='item' {{pdown}}='Autopilot.setspeed(2);'>
+				<img src='assets/speed3.png'><span><b>{{lng "autopilot.fast" "szybko"}}</b></span>
+			</div>
+			<div class='item' {{pdown}}='Autopilot.setspeed(3);'>
+				<img src='assets/speed2.png'><span><b>{{lng "autopilot.slow" "wolno"}}</b></span>
+			</div>
+			<div class='item' {{pdown}}='Autopilot.setspeed(4);'>
+				<img src='assets/speed1.png'><span><b>{{lng "autopilot.very_slow" "b. wolno"}}</b></span>
+			</div>
+		</div>
+	</div>
+	<div id='big_play'></div>
+	<div id='big_pause'></div>
+</script><script id="autoplay-ui" type="text/x-handlebars-template">
+	<div id='autoplay_ui'>
+		<div id='aui_back'>&times;</div>
+		<div id='aui_skip'>&raquo;</div>
+		<div id='aui_icon' class='aui_auto_running'><span>{{lng "autopilot.stop" "Zatrzymaj"}}</span><img src='/html5/assets/pause.png'></div>
+	</div>
+</script><script id="compass-main" type="text/x-handlebars-template">
+	<img src='assets/compass_arrow.png' id='carrow'>
+	<div class='rose'>
+		<img src='assets/compass_rose.png' width='100%' height='100%'>
+	</div>
+</script><script id="fullscreen-main" type="text/x-handlebars-template">
+	<a href='#' onclick='FullScreen.toggle(event);' title='Kliknij aby włączyć tryb pełno ekranowy'><img src='assets/fs.png'></a>
+</script><script id="quality-main" type="text/x-handlebars-template">
+	<a href='#' onclick='Quality.toggle(event);' title='Kliknij aby zmienić jakość'>HD</a>
+</script><script id="menu-main" type="text/x-handlebars-template">
+	<div id='hmenu'>
+	</div>
+	<div id='iwindow'>
+	</div>
+</script><script id="quality-main" type="text/x-handlebars-template">	
+</script><script id="variants-main" type="text/x-handlebars-template">
+	
+</script><script id="spot-edit-main" type="text/x-handlebars-template">
+	<div class='row'>
+		<div class='col8'>
+			<input type='text' placeholder='tytul' id='se_title' class='input'><br>
+		</div>
+		<div class='col4'>
+			<input type='text' placeholder='numer' id='se_no' class='input'><br>
+		</div>
+		<div class='col12'>
+			<input type='text' placeholder='tytul 2' id='se_title2' class='input'><br>
+		</div>
+		<div class='col12'>
+			<textarea id='se_info' class='input'></textarea>
+		</div>
+	</div>
+	<div class='clear'></div>
+	<input type='hidden' id='se_x' value=''><input type='hidden' id='se_y' value=''>
+	<div class='row'>
+		<div class='col8'>
+			<a href='javascript:void(null);' class='btn' onclick='SpotEdit.save();'>Zapisz zmiany</a>
+		</div>
+		<div class='col4'>
+			<a href='javascript:void(null);' class='btn btn-remove' onclick='SpotEdit.remove();'><i class="fa fa-trash"></i></a>
+		</div>
+	</div>
+	<div class='clear'></div>
+</script>
+
+<script id="uielement-edit-main" type="text/x-handlebars-template">
+	<div class='row'>
+		<div class='col12'>
+			<b>Typ elementu</b>
+			<select id='uie_element_type'>
+				<option value='photo'>Zdjęcie</option>
+				<option value='video'>Video</option>
+			</select>
+			<br>
+		</div>
+		<div class='col12'>
+			<input type='text' placeholder='tytul' id='uie_videourl' class='input'><br>
+		</div>
+		<div class='col12'>
+			<input type='text' placeholder='tytul' id='uie_videourl' class='input'><br>
+			<input type='file' id='uie_media' onchange='UIEdit.uploadfile'>
+			<a href='javascript:void(null)' onclick='UIEdit.selectMedia();' class='btn'>Wybierz film</a>
+			<div id='uie_console'></div>
+		</div>
+	</div>
+	<div class='clear'></div>
+	<input type='hidden' id='uie_x' value=''>
+	<input type='hidden' id='uie_y' value=''>
+	<div class='row'>
+		<div class='col8'>
+			<a href='javascript:void(null);' class='btn' onclick='UIEdit.save();'>Zapisz zmiany</a>
+		</div>
+		<div class='col4'>
+			<a href='javascript:void(null);' class='btn btn-remove' onclick='UIEdit.remove();'><i class="fa fa-trash"></i></a>
+		</div>
+	</div>
+	<div class='clear'></div>
+</script><script id="share-main" type="text/x-handlebars-template">	
+	<div class="share-win">		
+		<h3>Udostępnij spacer:</h3>
+      <div class="items">
+   		<a href="https://www.facebook.com/sharer/sharer.php?u={{ url }}&t={{ title }}"
+      onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+      target="_blank" title="Share on Facebook" class='share'><div class='facebook'><i class="fab fa-fw fa-facebook-f"></i></div><span>Udostępnij na facebooku</span></a>
+      
+      <a href="https://twitter.com/share?url={{ url }}&via=Pawel21143389&text={{ title }}"
+      onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+      target="_blank" title="Share on Twitter" class='share'><div class='twitter'><i class="fab fa-fw fa-twitter"></i></div><span>Udostępnij na twitterze</span></a>
+      </div>
+   	<div class='arrow'></div>
+   	<a href='javascript:void(null);' onclick='Share.toggle();' class='close'>&times;</a>
+	</div>
+</script><script type="text/x-template" id="tpl-qwin">
+<div :class="{'window': true, 'visible': visible}">
+	<div class="topbar">
+		<div class="timer" v-if="time != ''">{{ time }}</div>
+		<a href='javascript:void(null);' title="Zamknij" v-on:click="close()" class="close speaks" data-speak="PLAYER.CLOSE" data-speakgroup="TIPS">&times;</a>
+
+		<div v-if="state == 'question'">
+			Pytanie <b>{{ qcurrent }}</b> z <b>{{ qtotal }}</b>
+			<hr size='1'>
+		</div>
+	</div>
+
+	<div class='buttons' v-if="state == 'summary'">		
+		<div v-if='has_reg'>
+		<a href='javascript:void(null);' title='Regulamin' v-on:click="reg()" style='display:inline-block;padding-bottom:10px;'>Regulamin</a><br>
+		</div>
+		<a href='javascript:void(null);' v-on:click="rankings()" title='Zobacz wszystkie wyniki' data-speak="PLAYER.QUIZ.RANKINGS" data-speakgroup="TIPS" class="rankings-btn speaks">Zobacz wszystkie wyniki</a>
+		<a href='javascript:void(null);' v-on:click="startQuiz()" data-speak="PLAYER.QUIZ.START" data-speakgroup="TIPS" class="start-btn speaks" title='Rozpocznij Quiz'>Rozpocznij Quiz</a>
+	</div>
+
+	<div class='buttons' v-if="shownextbutton && state == 'question'">
+		<a href="javascript:void(null);" v-on:click="getNextQuestion();" data-speak="PLAYER.QUIZ.NEXT" data-speakgroup="TIPS" class="next-btn speaks" title='Następne pytanie'>Następne pytanie</a>
+	</div>
+
+	<div class="buttons" v-if="state == 'results'">
+		<a href='javascript:void(null);' v-on:click="saveresults();" v-if="cansave" class="save-btn speaks" data-speak="PLAYER.QUIZ.SAVE" data-speakgroup="TIPS" title="Zapisz wyniki">Zapisz wyniki</a>
+		<a href='javascript:void(null);' v-on:click="rankings()"  v-if="!cansave" class="save-btn speaks" data-speak="PLAYER.QUIZ.RANKINGS" data-speakgroup="TIPS" title="Zobacz wszystkie wyniki">Zobacz wszystkie wyniki</a>
+		<a href='javascript:void(null);' v-on:click="startQuiz();" class="restart-btn speaks" data-speak="PLAYER.QUIZ.NEW" data-speakgroup="TIPS" title='Nowy quiz'>Nowy quiz</a>
+	</div>
+
+	<div class="buttons" v-if="state == 'saveresults'">
+		<a href='javascript:void(null);' v-on:click="save();" v-if="cansave" class="save-btn speaks" data-speak="PLAYER.QUIZ.SAVE" data-speakgroup="TIPS" title='Zapisz mój wynik'>Zapisz mój wynik</a>
+	</div>
+
+	<div class="buttons" v-if="state == 'rankings'">
+		<a href='javascript:void(null);' v-on:click="reset();" class="restart-btn speaks" data-speak="PLAYER.QUIZ.BACK" data-speakgroup="TIPS" title='Powrót'>&laquo; Powrót</a>
+	</div>
+
+	<div class="buttons" v-if="state == 'big'">
+		<a href='javascript:void(null);' v-on:click="rankings();" class="restart-btn speaks" data-speak="PLAYER.QUIZ.BACK" data-speakgroup="TIPS" title='Powrót'>&laquo; Powrót</a>
+	</div>
+
+	<div class="buttons" v-if="state == 'reg'">
+		<a href='javascript:void(null);' v-on:click="reset();" class="restart-btn speaks" data-speak="PLAYER.QUIZ.BACK" data-speakgroup="TIPS" title='Powrót'>&laquo; Powrót</a>
+	</div>
+
+	<div :class='{"cpane": true, "with-title": hasTitle}'>
+		<div v-if="state == 'summary'">
+			<img :src='bg' class='visual'>
+			<h1>{{ title }}</h1>
+			<p class='rules' v-html="rules"></p>
+		</div>
+
+		<div v-if="state == 'reg'">
+			<h1>Regulamin</h1>
+			<p class='rules' v-html="reg_text"></p>
+			<a :href='reg_link' v-if='reg_link != undefined && reg_link != ""' target='_blank' title='Pobierz plik z regulaminem'>Pobierz plik z regulaminem</a>
+		</div>
+
+		<div v-if="state == 'question'">
+			<h3>{{ question }}</h3>
+			<div class='qphoto' :style="{'backgroundImage':'url(' + qphoto + ')'}"><i class="fa fa-question-circle" v-if='qphoto == ""'></i></div>		
+			<b>Wybierz 1 z {{ answers.length }} odpowiedzi:</b>
+			<ul v-if="!shownextbutton" class="answers">
+				<li v-for="(a, idx) in answers"><a href='javascript:void(null);' v-on:click="answer(idx + 1)" class="speaks"  :data-speak="'PLAYER.QUIZ.' + a.s" data-speakgroup="TIPS" :title="'Odpowiedź ' + a.s + ': ' + a.text"><span class="symbol">{{ a.s }}</span><div>{{ a.text }}</div></a></li>
+			</ul>
+
+			<div v-if="shownextbutton">
+				<ul class="answers">
+					<li v-for="(a, idx) in answers">
+						<span v-if="correct == idx + 1" class="correct"><span class="symbol"><i class="fa fa-thumbs-up"></i></span><div>{{ a.text }}</div></span>
+						<span v-if="correct != answered && answered == idx + 1" class="wrong"><span class="symbol"><i class="fa fa-times"></i></span><div>{{ a.text }}</div></span>
+						<span v-if="correct != idx + 1 && answered != idx + 1"><span class="symbol">{{ a.s }}</span><div>{{ a.text }}</div></span>
+					</li>
+				</ul>				
+			</div>
+	 	</div>
+
+		<div v-if="state == 'results'" class="results">
+			
+			<h4>
+				Twój wynik
+				<div class='result'>{{ result }}%</div>
+			</h4>
+
+			<h4>
+				<span class="far fa-clock"></span>
+				<div>{{ totalTime }}</div>
+			</h4>
+
+			<span class='stats'>Odpowiedziałeś poprawnie na <b>{{ rank.good }}</b> z <b>{{ rank.total }}</b> pytań.<br></span>
+
+			<div v-if="winicon != ''">
+				<h3>Gratulujemy, otrzymujesz odznaczenie !</h3>
+				<img :src='winicon' class="medal">
+			</div>
+
+			<div v-if="winicon == ''" class="nomedal">
+				<i class="fas fa-exclamation-circle"></i><br><br>
+				Aby otrzymać odznaczenie musisz odpowiedzieć poprawnie na co najmniej 75% pytań.
+			</div>
+
+			<h3 class="winmsg">{{ winmsg }}</h3>
+		</div> 	
+
+		<div v-if="state == 'saveresults'" class="results">
+			<h3 class='pseudo'>Podaj swój pseudonim</h3>
+			Twój wynik pojawi się w rankingu pod pseudonimem który podasz:
+			<div :class="{'form-field': true, 'error': nicknameerror}">
+				<input type='text' v-model="nickname" placeholder="wpisz pseudonim">
+			</div>
+		</div>	
+
+		<div v-if="state == 'rankings'" class="rankings">
+			<h1>{{ title }}</h1>
+			<table>
+				<tr><th></th>
+					<th>Pseudonim</th>
+					<th>Dobre odpowiedzi</th>
+					<th>Czas</th>
+				</tr>
+				<tr v-for="r in ranks">				
+					<td>
+						<span v-if="r.badge != ''">
+							<img :src="r.badge" height='30' v-if="r.big == ''">
+							<a href='javascript:void(null);' v-on:click="showBig(r.big)" v-if="r.big != ''"><img :src="r.badge" height='30'></a>
+						</span>
+					</td>
+					<td>{{ r.nickname }}</td>
+					<td>{{ r.good }} / {{ r.total }}</td>
+					<td><span class="far fa-clock"></span> {{ r.time }} sek.</td>
+				</tr>
+			</table>
+		</div>
+		<div v-if="state == 'big'" class="rankings" style='padding: 15%;padding-bottom: 0px; padding-top: 30px;'>
+			<img :src='big' style="width:100%;">
+		</div>
+	</div>
+</div>
+</script>
+
+<script type="text/x-template" id="tpl-questwin">
+<div :class="{'window': true, 'visible': visible}">
+	<div style='position: absolute;left:0%;top:-40px;z-index:9;border-radius: 100%;padding: 15px; border: 5px solid #f1f1f1; background-color:#ffffff;transform: translate(-50%, 0);-webkit-box-shadow: 0px 0px 43px 4px rgba(0,0,0,0.28);
+-moz-box-shadow: 0px 0px 43px 4px rgba(0,0,0,0.28);
+box-shadow: 0px 0px 43px 4px rgba(0,0,0,0.28);'><img :src='glyph' width='100' height='100' style='object-fit: contain;'></div>
+	<a href='javascript:void(null);' title="Zamknij" v-on:click="close()" class="close speaks" data-speak="PLAYER.CLOSE" data-speakgroup="TIPS">&times;</a>
+
+	<div :class='{"cpane": true, "with-title": hasTitle}' style='top: 15px;'>
+
+		<div v-if="state == 'question'">
+			<h3 style="padding-left: 70px">{{ question }}</h3>
+			<div class='qphoto' v-if='qphoto != "" && qphotoformat != "mp4"' :style="{'backgroundImage':'url(' + qphoto + ')'}"><i class="fa fa-question-circle" v-if='qphoto == ""'></i></div>		
+			<div class='qvideo' v-if='qphoto != "" && qphotoformat == "mp4"' id="quiz-video"></div>	
+
+			<b>Wybierz 1 z {{ answers.length }} odpowiedzi:</b>
+			<ul v-if="!shownextbutton" class="answers" style='padding-top: 10px'>
+				<li v-for="(a, idx) in answers"><a href='javascript:void(null);' v-on:click="answer(idx + 1)" class="speaks"  :data-speak="'PLAYER.QUIZ.' + a.s" data-speakgroup="TIPS" :title="'Odpowiedź ' + a.s + ': ' + a.text"><span class="symbol">{{ a.s }}</span><div>{{ a.text }}</div></a></li>
+			</ul>
+
+			<div v-if="shownextbutton">
+				<ul class="answers" style='padding-top: 10px'>
+					<li v-for="(a, idx) in answers">
+						<span v-if="correct && answered == idx + 1" class="correct"><span class="symbol"><i class="fa fa-thumbs-up"></i></span><div>{{ a.text }}</div></span>
+						<span v-if="!correct && answered == idx + 1" class="wrong"><span class="symbol"><i class="fa fa-times"></i></span><div>{{ a.text }}</div></span>
+					</li>
+				</ul>				
+			</div>
+	 	</div>
+
+		<div v-if="state == 'big'" class="rankings" style='padding: 15%;padding-bottom: 0px; padding-top: 30px;'>
+			<img :src='big' style="width:100%;">
+		</div>
+	</div>
+</div>
+</script><script type="text/x-template" id="tpl-lib">
+<div :class="{'window': true, 'visible': visible}" style="overflow: auto;">
+	<div :style="{'position': 'fixed', 'left': '0px', 'top': '0px', 'right': '0px', 'bottom': '0px', 'background-image': 'url(' + folder.bg.file + ')','background-size': 'cover', 'background-position': 'center, center', 'opacity': folder.bg.alpha, 'z-index': '-1'}"></div>
+	<div class='list' v-if="mode == 'list'">
+		<a href='javascript:void(null);' v-on:click='close()' class='close'>&times;</a>
+		<div class='paging'>
+			<h4 :style='{"color": settings.text.color}'><span v-html="folder.title"></span></h4>
+			<a href='javascript:void(null);' v-on:click="openFolder(folder.uf_id, -1)" :class="{'grayed': page <= 0}"><i class="fas fa-arrow-left"></i></a>
+			<b :style='{"color": settings.text.color}'>{{ parseInt(page) + 1 }} / {{ totalpages }}</b>
+			<a href='javascript:void(null);' v-on:click="openFolder(folder.uf_id, 1)" :class="{'grayed': page >= totalpages - 1}"><i class="fas fa-arrow-right"></i></a>
+		</div>
+
+		<div class="ffolder" v-for="sub in subs" v-on:click="openFolder(sub.uf_id)">
+			{{ sub.title }}
+		</div>
+		
+		<div class="file" v-for="(file, idx) in files">
+			<div class='prv' :style='{"background-image":"url(" + file.previewUrl + ")", "opacity": settings.gallery.alpha, "box-shadow": "0px 0px 10px 1px rgba(66, 68, 90," + settings.gallery.shadow + ")"}' v-if='file.type == "image"' v-on:click="preview(idx)" >
+			</div>
+			<div class='audio' v-if='file.type == "audio"' v-on:click="preview(idx)" >
+				<i class="fas fa-music"></i>
+			</div>
+			<a :href="file.previewUrl" target="_blank" class='audio' v-if='file.type == "document"' style="display:block;position: relative;padding-bottom: 60%">
+				<div style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
+					<img src="/html5/assets/doc.png" style="width:50%">
+				</div>
+				<!--<i class="fas fa-file" style="font-size:339px;opacity:0.5"></i>-->
+			</a>
+			<div class='title' :style='{"color": settings.text.color, "font-size": settings.text.size + "px"}'><div><span v-if='folder.params == null || folder.params.show_no'>{{ file.no }}. </span>{{ file.title }}</div></div>
+		</div>
+	</div>
+	<div class='preview' v-if="mode == 'preview'">
+		<a href='javascrip:void(null);' v-on:click='closePreview()' class='close'>&times;</a>
+		<div class='paging' :style='{"color": settings.text.color}'>
+			<br>
+			<a href='javascript:void(null);' v-on:click="preview(idx - 1)" :class="{'grayed': idx <= 0}"><i class="fas fa-arrow-left"></i></a>
+			<b :style='{"color": settings.text.color}'>{{ parseInt(page * 50 + idx + 1) }} / {{ total }}</b>
+			<a href='javascript:void(null);' v-on:click="preview(idx + 1)" :class="{'grayed': idx >= total - 1}"><i class="fas fa-arrow-right"></i></a>
+		</div>
+
+		<img :src='selected.previewUrl' class='image' v-if="selected.type == 'image'">
+
+		<img src="/html5/assets/doc.png" style="width:200px" v-if="selected.type == 'document'">
+		<a :href="selected.previewUrl" target="_blank" v-if="selected.type == 'document'">
+			<br>
+			<span style="display:inline-block; padding: 8px; border:2px solid #ffffff;color:#ffffff;border-radius:3px;">{{ lang.opendocument }}</span>
+		</a>
+
+		<audio controls v-if="selected.type == 'audio'">
+			<source :src="selected.previewUrl" type="audio/mpeg">
+		</audio>
+		<h4 :style='{"color": settings.text.color}'>{{ selected.no }}. {{ selected.title }}</h4>
+		<div class="descrow">
+			<div class='desc' :style='{"color": settings.text.color, "font-size": settings.text.size + "px"}'>{{ selected.desc }}</div>
+		</div>
+	</div>
+</div>
+</script><script id="comments-main" type="text/x-handlebars-template">	
+	<div class="comments">		
+      <a href='javascript:void(null);' onclick='Comments.close();' class='close'>&times;</a>
+		<h3>Komentarze:</h3>
+      <div class="com-list">
+      </div>
+      <div class="com-added">
+      Dziękujemy za wysłanie komentarza. Po sprawdzeniu zostanie on dodany.
+      <Br><Br>
+      <a href="javscript:void(null);" onclick="Comments.closeSendInfo();">Ok</a>
+      </div>
+      <div class="com-add">
+         <div class="com-form">         
+            <textarea id="com_message" tabindex="-1" maxlength="500" onkeydown="Comments.preventKeys(event)" onkeyup="Comments.preventKeys(event)" placeholder="Napisz komentarz ..."></textarea>
+            <input type="text" tabindex="-1" id="com_author" maxlength="50" onkeydown="Comments.preventKeys(event)" onkeyup="Comments.preventKeys(event)" placeholder="Autor">
+         </div>
+         <div class="right">
+            <span class='counter'></span>
+            <a href="javascript:void(null);" onclick="Comments.add();" class="send">Wyślij</a>
+         </div>
+
+         <div id="no-comments">Na razie brak komentarzy dla tego miejsca ...</div>
+      </div>
+      <a href="javascript:void(null)" class="btn-last" id="cmnt-btn-latest" onclick="Comments.latest();">Zobacz ostatnie komentarze w projekcie</a>
+      <a href="javascript:void(null)" class="btn-last btn-hide" id="cmnt-btn-current" onclick="Comments.open();">&laquo; Powrót</a>
+	</div>
+</script><script id="wcag-main" type="text/x-handlebars-template">
+	<div id="wcag-cnt">
+      <a href="javascript:void(null)" class="wcag-btn speaks" data-speakgroup='TIPS' data-speak='HTML5.tips.wcagtitle'><i class="fas fa-wheelchair"></i></a>
+      <a href="javascript:void(null)" class="blind-btn speaks" data-speakgroup='TIPS' data-speak='HTML5.tips.blindtitle'><img src="assets/icon_blind.png"></a>
+      <div class="wcag-info">
+         <a href="javascript:void(null);" onclick="Wcag.closetext();" class="close" aria-label='Zamknij okno informacji dla niepełnosprawnych'><span aria-hidden='true'>×</span></a>
+         <div class="head">
+            <h2>{{lng "info.wcag.title" "Opcje dostępności WCAG 2.1"}}</h2>
+         </div>
+         <div class="content">
+            {{lng "info.wcag.body"
+            '<div class="opt">
+            Na wirtualnym spacerze użytkownicy mają możliwość korzystania z klawiatury.   
+            Obracanie panoramy odbywa się za pośrednictwem <span class="mark">strzałek</span>.
+            </div>
+            <br>
+            <b>Dodatkowo:</b>
+            <div class="opt">
+               <span class="mark">TAB</span> umożliwia przeskakiwanie do następnego elementu,<br>
+            </div>
+            <div class="opt">
+               <span class="mark">SHFT + TAB</span> umożliwia cofanie do poprzedniego elementu,
+            </div>
+            <br><br>
+            <b>Na panoramie</b><br>
+            <div class="opt">
+               <span class="mark">ENTER</span> - po ustawieniu się na wybrany gorący punkt i przyciśnięciu klawisza enter nastąpi przejście do panoramy do której kieruje gorący punkt.
+            </div>
+            <div class="opt">
+               <span class="mark">BACKSPACE</span> - umożliwi cofnięcie się do wcześniejszej panoramy,
+            </div>
+            <div class="opt">
+               <span class="mark">+</span> - umożliwia przybliżanie panoramy,
+            </div>
+            <div class="opt">
+               <span class="mark">-</span> - umożliwia oddalanie panoramy,
+            </div>
+            ' }}
+         </div>
+      </div>
+   </div>
+</script><script id="quest-main" type="text/x-handlebars-template">	
+	<div class="quest">		      
+      <div class="qtitle">
+         <div class="qexcl">?</div>
+         <div class="qbox"><div class="qbox2"></div></div>
+      </div>
+      <div class="label">Gra panoramiczna</div>
+      <div class="qpane">
+         <a href="javascript:void(null);" class="qclose speaks" data-speak="PLAYER.CLOSE" data-speakgroup="TIPS">&times;</a>
+         <div class='qtext'>
+         <h3>{{ title }}</h3>
+         {{{ short }}}<br>
+         {{{ info }}}
+         <hr size='1'>
+         {{{ help }}}
+         </div>
+         <a href="javascript:void(null);" class="qproceed speaks" data-speakgroup="TIPS" data-speak="HTML5.tips.start" >START</a>
+         <a href="javascript:void(null);" class="qrestart">RESTART</a>
+      </div>
+	</div>
+</script>
+
+<script id="quest-widget" type="text/x-handlebars-template">
+   <div class="quest-widget">
+      <div class="qtitle">
+         <div class="q1"></div>
+         Zadania
+         <div class="qexcl">{{ count }}</div>
+         <div class="qbox"><div class="qbox2"></div></div>
+      </div>
+      <div class="qpane">
+      {{{ pending }}}
+      </div>
+   </div>
+</script>
+
+<script id="quest-short" type="text/x-handlebars-template">
+   <div class="questbox">
+      <div class='qn'></div>
+      <b class='qno'>{{ no }}</b>
+      <div class='qpanel'>
+         <h4>{{ quest.name }}</h4>
+         <span>{{{ quest.short }}}</span>
+         <div class='stats'>
+            <span>Zebrano: <b>{{quest.collected}}/{{quest.tocollect}}</b></span>
+
+            <span class='timer'><i class="fa fa-clock"></i> {{ quest.time }}</span>
+         </div>
+      </div>
+   </div>
+</script>
+
+<script id="quest-victory" type="text/x-handlebars-template">
+   <div class="quest-victory">
+      <div class='trophy'> 
+         <i class="fa fa-fw fa-trophy"></i>
+      </div>
+
+      <h2>Zadanie wykonane</h2>
+      {{ quest.short }}
+      <!--
+      <br>
+         <i class="fa fa-star yl"></i>
+         <i class="fa fa-star yl"></i>
+         <i class="fa fa-star yl"></i>
+      <br>
+   -->
+      <h2 class='fancy'>Twój czas: {{ quest.time }}</h2>
+      <hr size='1'>
+      Możesz wziąć udział w losowaniu atrakcyjnych nagród, jeżeli zapiszesz swój wynik.
+      <a href="javascript:void(null)" class='vsaverank'>Zapisz swój wynik</a>
+      <a href="javascript:void(null)" class='vranking'>Zobacz wszystkie wyniki</a>
+      <a href="javascript:void(null)" class='vclose'>Zamknij</a>
+   </div>
+</script>
+
+<script id="quest-saverank" type="text/x-handlebars-template">
+   <div class="quest-saverank">
+      <div class='trophy'> 
+         <i class="fa fa-fw fa-star"></i>
+      </div>
+
+      <h2 class='fancy'>Twój Czas: {{ quest.time }}</h2>
+      <hr size='1'>
+      <h3>Zapisz wynik</h3>
+      <input type='text' id='quest-nick' name='quest-nick' placeholder='Podaj nick'>
+      <div class='help'>Jeżeli chcesz wziąć udział w losowaniu nagród, podaj swój adres e-mail.</div>
+      <input type='text' id='quest-email' name='quest-email' placeholder='Podaj email'>
+
+      <a href="javascript:void(null)" class='vsaverank'>Zapisz</a>
+      <a href="javascript:void(null)" class='vclose'>Zamknij</a>
+   </div>
+</script>
+
+<script id="quest-ranking" type="text/x-handlebars-template">
+   <div class="quest-ranking">
+      <div class='trophy'> 
+         <i class="fa fa-fw fa-medal"></i>
+      </div>
+
+      <div class='ranks'>
+         <table id="quest-ranks">         
+         </table>
+      </div>
+
+      <a href="javascript:void(null)" class='vclose'>Zamknij</a>
+   </div>
+</script>		<script id="hotspot-template" type="text/x-handlebars-template">
+			<div class="marker" {{#if with_lift}}style='position:absolute;left:0px;top:{{ offsety }}px;z-index:30;'{{/if}}>
+				<img src='assets/hotspot2_bg.png' width='50' height='50' class='bg'>
+				<img src='{{spotfile}}' width='{{ico_width}}' height='{{ico_height}}' style='{{style}}' class='ico'>
+				<img src='assets/hotspot2_top.png' width='50' height='50' class='fulllooprotation'>
+				<div class='spotdesc'>
+					<!-- {{#unless hasPreview}} spot_nothumb{{/unless}} -->
+					<!-- <a href='javascript:void(null);' class='close'>&times;</a> -->
+
+					{{{ data.fullName }}}
+					<a href='javascript:void(null);' {{click}}='player.go("{{ident}}","{{angle}}")'>{{{data.html}}}</a>
+					{{#if hasPreview}}<a href='javascript:void(null);' {{click}}='player.go("{{ident}}","{{angle}}")'><img src='{{thumbnail}}' width='200'></a>{{/if}}
+					<!--
+					<a href='javascript:void(null);' {{click}}='player.go("{{ident}}","{{angle}}")' class='button'>Przejdź</a>
+					-->
+					<div class='arrow'></div>
+				</div>
+			</div>
+			{{#if with_lift}}
+			<div class='circle-marker' style='top:-{{ lifth }}px;height:{{ lifth }}px'></div>
+			{{/if}}
+		</script>
+
+		<script id="hotspot-start-template" type="text/x-handlebars-template">			
+			<span class='rest' style='{{ fstyle }}'></span>
+			<img src='{{spotfile}}' width='{{ico_width}}' height='{{ico_height}}' style='{{style}}' class='ico'>
+			<span class='hovering' style='{{hstyle}}'><img src='{{spotfileHover}}' width='{{ico_width}}' height='{{ico_height}}' style='{{style2}}' class='ico_hover'></span>
+			<!--
+			<div class='spotdesc{{#unless hasPreview}} spot_nothumb{{/unless}}'>
+				<a href='javascript:void(null);' class='close'>&times;</a>
+				{{data.fullName}}
+				{{#if hasPreview}}<a href='javascript:void(null);' {{click}}='player.go("{{ident}}","{{angle}}")'><img src='{{data.place.thumb}}' width='200'></a>{{/if}}
+				<a href='javascript:void(null);' {{click}}='player.go("{{ident}}","{{angle}}")' class='button'>Przejdź</a>
+				<div class='arrow'></div>
+			</div>
+			-->
+		</script>
+
+		<script id="start-template" type="text/x-handlebars-template">
+		<!--
+			<div class='start' style='background-image:url({{image}});'>
+				<h1>{{city}}</h1>
+				<h2>{{title}}</h2>
+				<div class='start_button_container'><a href='javascript:void(null);' onclick='player.go({{ident}},{{angle}});' class='start_button'><img src='assets/start_trip.png'> {{lng "start.start_trip" "Rozpocznij wycieczkę"}}</a></div>
+			</div>
+		-->
+			<div class='startview' style='background-image:url({{image}});'>
+				<h1>{{city}}</h1>
+				<h2>{{title}}</h2>
+				<div class='start_button_container'>
+					<a href='javascript:void(null);' onclick='player.go({{ident}},{{angle}});' class='start_button'><img src='assets/start_trip.png' height='32'> {{lng "start.start_trip" "Rozpocznij wycieczkę"}}</a>
+
+					<a href='javascript:void(null);' onclick='player.showMenu();' class='menu_button'><img src='assets/menulist.png' height='32'> {{lng "start.menu_presentation" "Menu prezentacji"}}</a>
+
+					<a href='javascript:void(null);' onclick='Search.open();' class='search_button'><img src='assets/search.png' height='32'> {{lng "start.search_button" "Wyszukaj miejsce"}}</a>
+
+					<a href='javascript:void(null);' onclick='mapInfo.toggleMenu();' class='plan_button'><img src='assets/route.png' height='32'> {{lng "start.plan_button" "Mapa - wyznaczanie trasy"}}</a>
+
+					<a href='javascript:void(null);' onclick='Help.open();' class='help_button'><img src='assets/help_icon.png' height='32'> {{lng "start.help_button" "Ustawienia i Pomoc"}}</a>
+
+				</div>
+			</div>
+
+		</script>
+
+		<script id="panorama-template" type="text/x-handlebars-template">
+			<div id='world'>
+				<div id='pano' {{#if wfix}}class='{{wfixname}}'{{/if}}>
+					<div id='_a' class='buf' style='width:{{w}}px;height:{{w}}px;'>
+						<img src='' id="ia" width='{{w}}' height='{{w}}'>
+					</div>
+					<div id='_b' class='buf' style='width:{{w}}px;height:{{w}}px;'>
+						<img src='' id="ib" width='{{w}}' height='{{w}}'>
+					</div>
+					<div id='_c' class='buf' style='width:{{w}}px;height:{{w}}px;'><img src='' id="ic" width='{{w}}' height='{{w}}'></div>
+					<div id='_d' class='buf' style='width:{{w}}px;height:{{w}}px;'><img src='' id="id" width='{{w}}' height='{{w}}'></div>
+					<div id='_e' class='buf' style='width:{{w}}px;height:{{w}}px;'><img src='' id="ie" width='{{w}}' height='{{w}}'></div>
+					<div id='_f' class='buf' style='width:{{w}}px;height:{{w}}px;'><div class='plogo'><img src='assets/pano_logo.png' class='logo'></div><img src='' id="if" width='{{w}}' height='{{w}}' class='panoimg'></div>
+				</div>
+				<div id='pano2' {{#if wfix}}class='{{wfixname}}'{{/if}}>
+					<div id='_a2' class='buf2' style='width:{{w}}px;height:{{w}}px;'>
+						<img src='' id="ia2" width='{{w}}' height='{{w}}'>
+					</div>
+					<div id='_b2' class='buf2' style='width:{{w}}px;height:{{w}}px;'>
+						<img src='' id="ib2" width='{{w}}' height='{{w}}'>
+					</div>
+					<div id='_c2' class='buf2' style='width:{{w}}px;height:{{w}}px;'><img src='' id="ic2" width='{{w}}' height='{{w}}'></div>
+					<div id='_d2' class='buf2' style='width:{{w}}px;height:{{w}}px;'><img src='' id="id2" width='{{w}}' height='{{w}}'></div>
+					<div id='_e2' class='buf2' style='width:{{w}}px;height:{{w}}px;'><img src='' id="ie2" width='{{w}}' height='{{w}}'></div>
+					<div id='_f2' class='buf2' style='width:{{w}}px;height:{{w}}px;'><div class='plogo'><img src='assets/pano_logo.png' class='logo'></div><img src='' id="if2" width='{{w}}' height='{{w}}' class='panoimg'></div>
+				</div>
+			</div>
+		</script>
+
+		<script type="text/javascript" src="app/dist/lib/jquery-2.0.2.min.js"></script>
+		<script type="text/javascript" src="app/dist/lib/jquery.nicescroll.min.js"></script>
+		<script type="text/javascript" src="app/dist/lib/handlebars-v4.0.2.js"></script>
+		<script type="text/javascript" src="app/dist/lib/fulltilt.min.js"></script>
+		<script type="text/javascript" src="app/dist/lib/three.min.js"></script>
+
+		<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3ZJiw3XQrjhyCNwbJxu4T7meaME2v6z4"></script>
+
+		<!--<script src="libs/history/scripts/bundled/html4+html5/jquery.history.js"></script>-->
+		<!--<script src="libs/history/scripts/bundledjquery.history.js"></script>-->
+		
+		<!--
+		<script type="text/javascript" src="libs/history/scripts/uncompressed/history.adapter.jquery.js"></script>
+		<script type="text/javascript" src="libs/history/scripts/uncompressed/history.js"></script>		
+		-->
+		<script type="text/javascript" src="app/dist/wkraj_player.js?c243112b9d51add457fc9ecf7127fa63"></script>
+
+				<script type="text/javascript" src="playerloader.js"></script>
+		<script type="text/javascript" src="app/dist//locale/EN.json"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+				<script src="https://www.youtube.com/iframe_api"></script>
+
+		
+								<script type="text/javascript">
+		
+			$(document).ready(function() {
+
+				player.half = 775;
+				
+				try {				
+					player.setLang("EN");
+				} catch(e) {
+					alert(e.toString());
+				}
+								player.offline = true;
+													player.init(87550,"",'','/html5',0);
+
+							});
+			/*
+			(function(window,undefined){
+				//History.Adapter.bind(window,'statechange',function() {		
+				$(window).bind("statechange", function() {
+					console.log("statechange");
+					});
+				//player.setupHistory();
+			})(window);
+			*/
+
+			(function() {
+			  var autoLink,
+			    slice = [].slice;
+
+			  autoLink = function() {
+			    var callback, k, linkAttributes, option, options, pattern, v;
+			    options = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+			    pattern = /(^|[\s\n]|<[A-Za-z]*\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
+			    if (!(options.length > 0)) {
+			      return this.replace(pattern, "$1<a href='$2'>$2</a>");
+			    }
+			    option = options[0];
+			    callback = option["callback"];
+			    linkAttributes = ((function() {
+			      var results;
+			      results = [];
+			      for (k in option) {
+			        v = option[k];
+			        if (k !== 'callback') {
+			          results.push(" " + k + "='" + v + "'");
+			        }
+			      }
+			      return results;
+			    })()).join('');
+			    return this.replace(pattern, function(match, space, url) {
+			      var link;
+			      link = (typeof callback === "function" ? callback(url) : void 0) || ("<a href='" + url + "'" + linkAttributes + ">" + url + "</a>");
+			      return "" + space + link;
+			    });
+			  };
+
+			  String.prototype['autoLink'] = autoLink;
+
+			}).call(this);	
+		</script>
+		
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-17842756-1']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+
+	</body>
+</html>

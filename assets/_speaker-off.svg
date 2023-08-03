@@ -1,0 +1,19 @@
+<svg width="75" height="75" xmlns="http://www.w3.org/2000/svg">
+ <style>
+  <![CDATA[#e5o2vh5izxwy2 {animation: e5o2vh5izxwy2_c_o 1500ms linear infinite normal forwards}@keyframes e5o2vh5izxwy2_c_o { 0% {opacity: 0} 26.666667% {opacity: 1} 53.333333% {opacity: 1} 60% {opacity: 0} 100% {opacity: 0} }#e5o2vh5izxwy4 {animation: e5o2vh5izxwy4_c_o 1500ms linear infinite normal forwards}@keyframes e5o2vh5izxwy4_c_o { 0% {opacity: 0} 20% {opacity: 0} 53.333333% {opacity: 1} 80% {opacity: 1} 86.666667% {opacity: 0} 100% {opacity: 0} }#e5o2vh5izxwy5 {animation: e5o2vh5izxwy5_c_o 1500ms linear infinite normal forwards}@keyframes e5o2vh5izxwy5_c_o { 0% {opacity: 0} 46.666667% {opacity: 0} 80% {opacity: 1} 100% {opacity: 0} }]]>
+ </style>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="77" width="77" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke-opacity="0" stroke-width="5" stroke="rgb(17,17,17)" fill="rgb(251,251,251)" d="m52.74763,12.11907l-17.154,14.837l-16.235,0l0,19.093l15.989,0l17.4,15.051l0,-48.981z" id="e5o2vh5izxwy3"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_3" y2="4.95313" x2="72" y1="72.95313" x1="2" stroke-opacity="0" stroke-width="5" stroke="rgb(17,17,17)" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="27.90136" x2="12.98517" y1="92.85626" x1="-5.57337" opacity="0.5" fill-opacity="null" stroke-opacity="0" stroke-width="5" stroke="rgb(17,17,17)" fill="none"/>
+  <path id="svg_16" stroke-opacity="0" stroke-width="5" stroke="rgb(17,17,17)" fill="#ff0000"/>
+  <rect id="svg_20" height="19.06013" width="1.88093" y="27.14899" x="33.55004" stroke-opacity="0" stroke-width="5" stroke="rgb(17,17,17)" fill="#000000"/>
+  <rect stroke="rgb(17,17,17)" transform="rotate(-45.11263656616211 38.169776916503885,36.56467819213867) " id="svg_18" height="5.73907" width="108.28534" y="33.69514" x="-15.97289" stroke-opacity="0" stroke-width="5" fill="#ff0000"/>
+ </g>
+</svg>
